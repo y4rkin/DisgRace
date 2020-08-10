@@ -9,6 +9,7 @@ from time import sleep
 
 __author__ = "Berdar Yarkın Yücesoy"
 __version__= "0.1"
+
 __maintainer__= "Berdar Yarkın Yücesoy"
 __email__= "yarkinyucesoy@gmail.com"
 __status__= "Development"
@@ -51,10 +52,10 @@ pygame.display.set_icon(icon)
 
 clock = pygame.time.Clock()
 
-def car(a,b):
+def car(a,b):   #blits car
     mainDisplay.blit(greenCar,(a, b))
 
-def game_exit():
+def game_exit(): 	#exits pygame and python both
     pygame.quit()
     print('\033[93m' + "-" * 30 + "\n          GAME OVER\n" + "-" * 30 + "\nScore: " + str(int(score)) + "   High Score:  " + str(int(hc_func(score))) + '\033[0m')
     sleep(3)
@@ -64,8 +65,7 @@ def game_over():
     go_message()
     game_loop()
 
-
-def go_message():
+def go_message():	#shows game over message including score and high score
     text = font.render("GAME OVER", True, black)
     scotext = font.render("SCORE: {}".format(int(score)), True, black)
     start3 = font2.render("Starting in 3", True, black)
@@ -108,7 +108,7 @@ def show_score(sc):
     sc_widget = font3.render("Score: " + str(int(sc)), True, black)
     mainDisplay.blit(sc_widget,(0,0))
 
-def draw_rect(objlist,speed):
+def draw_rect(objlist,speed):	#creates, moves and draws rectangle obstacles
     if len(objlist) < 2:
         objlist.append(Rectangle())
     for object in objlist:
@@ -117,10 +117,10 @@ def draw_rect(objlist,speed):
         if object.y> display_height:
             objlist.remove(object)
 
-def coll(list,car_x,car_y):
+def coll(o_list,car_x,car_y):  #checks for collusions
     x = car_x
     y = car_y
-    for object in list:
+    for object in o_list:
         if (y + car_height)>object.y>(y - object.height):
             print("y crossover")
             if (x+car_width)>object.x>(x-object.width):
@@ -137,7 +137,7 @@ class Rectangle:
 
 
 
-def game_loop():
+def game_loop():		#main loop
     rect1 = Rectangle()
     rect1.y = -150
     rect2 = Rectangle()
@@ -161,6 +161,7 @@ def game_loop():
     s = 10
     global score
     score = .0
+	
     while running:
         for event in pygame.event.get():
             print(event)
@@ -208,5 +209,6 @@ def game_loop():
         clock.tick(60)
     game_exit()
 
-game_loop()
-game_exit()
+if __name__ == '__main__':	
+	game_loop()
+	game_exit()
