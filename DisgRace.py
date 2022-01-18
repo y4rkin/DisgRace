@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 '''DisgRace.py: A simple race game.'''
@@ -9,10 +9,6 @@ from time import sleep
 
 __author__ = "Berdar Yarkın Yücesoy"
 __version__ = "0.1"
-
-__maintainer__ = "Berdar Yarkın Yücesoy"
-__email__ = "yarkinyucesoy@gmail.com"
-__status__ = "Development"
 
 DISPLAY_WIDTH = 1500
 DISPLAY_HEIGHT = 750
@@ -63,7 +59,7 @@ def game_exit():  # exits pygame and python both
     print('\033[93m' + "-" * 30 + "\n          GAME OVER\n" + "-" * 30 + "\nScore: " + str(
         int(score)) + "   High Score:  " + str(int(hc_func(score))) + '\033[0m')
     sleep(3)
-    quit()
+    raise SystemExit
 
 
 def game_over():
@@ -220,7 +216,7 @@ def game_loop():  # main loop
 
         pygame.display.update()
         clock.tick(60)
-    game_exit()
+    # game_exit()
 
 def main():       #Will have features like: quit, restart, change language, fullscreen mode...
     game_loop()
@@ -228,3 +224,4 @@ def main():       #Will have features like: quit, restart, change language, full
 
 if __name__ == '__main__':
     main()
+
