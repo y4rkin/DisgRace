@@ -1,14 +1,12 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
-'''DisgRace.py: A simple race game.'''
 
 import pygame
 from random import randint
 from time import sleep
 
 __author__ = "Berdar Yarkın Yücesoy"
-__version__ = "0.1"
+__version__ = "0.2"
 
 DISPLAY_WIDTH = 1500
 DISPLAY_HEIGHT = 750
@@ -29,7 +27,7 @@ high_score = .0
 
 pygame.init()
 
-icon = pygame.image.load(r".\images\rectangle.png")
+icon = pygame.image.load(r".\images\triangle.png")
 greenCar = pygame.image.load(r".\images\green_car.png")
 
 pygame.mixer.init()
@@ -41,7 +39,7 @@ font2 = pygame.font.Font(r".\fonts\LucidaTypewriterRegular.ttf", 50)
 font3 = pygame.font.Font(r".\fonts\LucidaTypewriterRegular.ttf", 30)
 
 pautext = font1.render("PAUSED", True, black)
-pautext_rect = pautext.get_rect(center=(DISPLAY_WIDTH/2 , DISPLAY_HEIGHT/2 - 100))
+pautext_rect = pautext.get_rect(center=(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2 - 100))
 
 mainDisplay = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
 pygame.display.set_caption("DisgRace  v0.1")
@@ -59,7 +57,7 @@ def game_exit():  # exits pygame and python both
     print('\033[93m' + "-" * 30 + "\n          GAME OVER\n" + "-" * 30 + "\nScore: " + str(
         int(score)) + "   High Score:  " + str(int(hc_func(score))) + '\033[0m')
     sleep(3)
-    raise SystemExit
+    quit()
 
 
 def game_over():
@@ -69,13 +67,13 @@ def game_over():
 
 def go_message():  # shows game over message including score and high score
     text = font1.render("GAME OVER", True, black)
-    text_rect = text.get_rect(center=(DISPLAY_WIDTH/2, 95))
+    text_rect = text.get_rect(center=(DISPLAY_WIDTH / 2, 95))
 
     scotext = font1.render("SCORE: {}".format(int(score)), True, black)
     start3 = font2.render("Starting in 3", True, black)
     start2 = font2.render("Starting in 2", True, black)
     start1 = font2.render("Starting in 1", True, black)
-    start_rect = start1.get_rect(center=(DISPLAY_WIDTH/2 , DISPLAY_HEIGHT/2))
+    start_rect = start1.get_rect(center=(DISPLAY_WIDTH / 2, DISPLAY_HEIGHT / 2))
 
     mainDisplay.blit(text, text_rect)
     mainDisplay.blit(scotext, (450, 150))
@@ -100,7 +98,7 @@ def go_message():  # shows game over message including score and high score
     pygame.time.delay(1000)
 
 
-def pause():    #Will have a quit button
+def pause():
     mainDisplay.blit(pautext, pautext_rect)
     pygame.display.update()
 
@@ -120,11 +118,11 @@ def show_score(sc):
 def draw_rect(objlist, speed):  # creates, moves and draws rectangle obstacles
     if len(objlist) < 2:
         objlist.append(Rectangle())
-    for object in objlist:
-        object.y += speed
-        pygame.draw.rect(mainDisplay, blue2, (object.x, object.y, object.width, object.height))
-        if object.y > DISPLAY_HEIGHT:
-            objlist.remove(object)
+    for objct in objlist:
+        objct.y += speed
+        pygame.draw.rect(mainDisplay, blue2, (objct.x, objct.y, objct.width, objct.height))
+        if objct.y > DISPLAY_HEIGHT:
+            objlist.remove(objct)
 
 
 def coll(o_list, car_x, car_y):  # checks for collusions
@@ -189,7 +187,7 @@ def game_loop():  # main loop
                 if event.key == pygame.K_RIGHT:
                     right_hold = False
 
-        if paused:    
+        if paused:
             pause()
             continue
 
@@ -216,12 +214,13 @@ def game_loop():  # main loop
 
         pygame.display.update()
         clock.tick(60)
-    # game_exit()
+    game_exit()
 
-def main():       #Will have features like: quit, restart, change language, fullscreen mode...
+
+def main():  # Will have features like: quit, restart, change language, fullscreen mode...
     game_loop()
     game_exit()
 
+
 if __name__ == '__main__':
     main()
-
