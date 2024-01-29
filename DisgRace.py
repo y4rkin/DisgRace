@@ -129,11 +129,8 @@ def coll(o_list, car_x, car_y):  # checks for collusions
     x = car_x
     y = car_y
     for obj in o_list:
-        if (y + car_height) > obj.y > (y - obj.height):
-            print("y crossover")
-            if (x + car_width) > obj.x > (x - obj.width):
-                print("x crossover")
-                game_over()
+        if (y + car_height) > obj.y > (y - obj.height) and (x + car_width) > obj.x > (x - obj.width):
+            game_over()
 
 
 class Rectangle:
@@ -171,7 +168,6 @@ def game_loop():  # main loop
 
     while running:
         for event in pygame.event.get():
-            print(event)
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.KEYDOWN:
@@ -201,8 +197,8 @@ def game_loop():  # main loop
         elif x < 0:
             x = 0
 
-        n += 0.002
-        s += 0.002
+        n += 0.003 #horizontal speed
+        s += 0.002 #vertical speed
         score += s / 60
         hc_func(score)
 
