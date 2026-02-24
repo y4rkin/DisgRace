@@ -38,6 +38,3 @@ Requires Python 3.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 Copyright (c) 2020 y4rkin
-
-* **Author:** Berdar Yarkın Yücesoy
-* **Audio:** "Retro Platforming" by David Fesliyan
